@@ -19,7 +19,7 @@
             <img src="{{ url_for('static', filename=art.filename)}}" alt="{{art.title}}">
             <h2><strong>{{art.title}}</strong></h2><br>
             <p>{{art.description}}</p>
-            <p>${{art.price}}</p>
+            <p>€{{art.price}}</p>
             
         </div>
         {% endfor %}
