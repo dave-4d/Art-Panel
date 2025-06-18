@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Art Panels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hoho.css')}}">
+
+<body>
+
+    <h1> Welcome to Art store 🎨</h1>
+
+    {% if message %}
+        <p style="color: red">{{ message }}</p>
+    {% endif %}
+
+    <div class="art-grid">
+        {% for art in artworks%}
+        <div class="art-card">
+            
+            <img src="{{ url_for('static', filename=art.filename)}}" alt="{{art.title}}">
+            <h2><strong>{{art.title}}</strong></h2><br>
+            <p>{{art.description}}</p>
+            <p>${{art.price}}</p>
+            
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2><strong>🛒 Purchase Artwork</strong></h2>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Your name"><br>
+        <input type="email" name="email" placeholder="Your email"><br>
+        <select name="title">
+            <option value=""><strong>Select What You like</strong></option>
+            {% for art in artworks%}
+            <option value="{{ art.title }}">{{ art.title }}</option>
+        {% endfor %}
+        </select><br>
+        <button type="submit">BUY</button>
+
+    </form>
+</body>
+</head>
+</html>
