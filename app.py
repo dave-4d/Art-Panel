@@ -1,26 +1,23 @@
 from flask import Flask, render_template, url_for, redirect, request
 from flask_mail import Mail, Message
+import json
+
 
 app = Flask(__name__)
 
-app.config['Mail_SERVER'] = 'smtp.gmail.com'
-app.config['Mail_PORT'] = 587
-app.config['Mail_USE_TLS'] = True
-app.config['Mail_USERNAME'] = '---email.gmail.com'
-app.config['Mail_PASSWORD'] = 'yourpassword'
+#app.config['Mail_SERVER'] = 'smtp.gmail.com'
+#app.config['Mail_PORT'] = 587
+#app.config['Mail_USE_TLS'] = True
+#app.config['Mail_USERNAME'] = '---email.gmail.com'
+#app.config['Mail_PASSWORD'] = 'yourpassword'
 
-mail = Mail(app)
+#mail = Mail(app)
+
+with open("artworks_data.json", "r") as f:
+    artworks = json.load(f)
 
 
-artworks = [
-    {"title": "Africa", "price": 100.00, "description": "Portrait study inspired by a model from Pinterest.", "filename": "images/24_12_03.png"},
-    {"title": "Landscape Study", "price": 220.50, "description": "Practice piece for an environmental scene.", "filename": "images/Landscape_Study.png"},
-    {"title": "Liberian Girl", "price": 120.00, "description": "A portrait of a beautiful woman inspired from Pinterest.", "filename": "images/Liberian_girl.jpg"},
-    {"title": "Light Study", "price": 200.00, "description": "Perspective practice", "filename": "images/Light_Study.png"},
-    {"title": "Manga Pose", "price": 95.00, "description": "A piece where I was testing out manga styles.\nFrom my favorite artist Yusuke Murata.", "filename": "images/Manga_Pose.jpg"},
-    {"title": "Portrait", "price": 100.00, "description": "A deep and contemplative portrait.", "filename": "images/Portrait.png"},
-    {"title": "Riley x Cindy", "price": 150.00, "description": "Fan art from one of my favorite shows 'The Boondocks'.", "filename": "images/Riley_Cindy.jpg"}
-]
+
 
 
 def save_purchases(name, email, title):
