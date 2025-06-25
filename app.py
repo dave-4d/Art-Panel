@@ -5,6 +5,7 @@ import json
 
 app = Flask(__name__)
 
+# email configuration (Gmail)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -13,15 +14,17 @@ app.config['MAIL_PASSWORD'] = 'vodx pwia srsv zljx'
 
 mail = Mail(app)
 
+# Load artworks data from JSON file
 with open("artworks_data.json", "r") as f:
     artworks = json.load(f)
 
 
-
+# This saves the purchase purchasing info 
 def save_purchases(name, email, title):
     with open("purchases.txt", "a") as file:
         file.write(f"{name},{email},{title}")
         
+# This sends an email. A small receipt for the purchase
 def send_purchases_email(recipient, art):
     subject = f"Thanks for Purchasing: {art['title']}"
     body = f"""Hi,
@@ -71,7 +74,3 @@ def thankyou():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
-# JSON file for artworks
-# # styling (pep8 and Docstrings)
-# Connect email 
