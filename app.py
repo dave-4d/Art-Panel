@@ -1,6 +1,15 @@
 from flask import Flask, render_template, url_for, redirect, request
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+
+app.config['Mail_SERVER'] = 'smtp.gmail.com'
+app.config['Mail_PORT'] = 587
+app.config['Mail_USE_TLS'] = True
+app.config['Mail_USERNAME'] = '---email.gmail.com'
+app.config['Mail_PASSWORD'] = 'yourpassword'
+
+
 
 artworks = [
     {"title": "Africa", "price": 100.00, "description": "Portrait study inspired by a model from Pinterest.", "filename": "images/24_12_03.png"},
@@ -48,3 +57,7 @@ def thankyou():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
+# JSON file for artworks
+# # styling (pep8 and Docstrings)
+# Connect email 
