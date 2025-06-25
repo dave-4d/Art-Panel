@@ -5,18 +5,16 @@ import json
 
 app = Flask(__name__)
 
-#app.config['Mail_SERVER'] = 'smtp.gmail.com'
-#app.config['Mail_PORT'] = 587
-#app.config['Mail_USE_TLS'] = True
-#app.config['Mail_USERNAME'] = '---email.gmail.com'
-#app.config['Mail_PASSWORD'] = 'yourpassword'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'rubgdavid@gmail.com'
+app.config['MAIL_PASSWORD'] = 'vodx pwia srsv zljx'
 
-#mail = Mail(app)
+mail = Mail(app)
 
 with open("artworks_data.json", "r") as f:
     artworks = json.load(f)
-
-
 
 
 
@@ -58,6 +56,9 @@ def index():
             
             if found:
                 save_purchases(name, email, title)
+                art = next((a for a in artworks if a["title"] == title), None)
+                if art:
+                    send_purchases_email(email, art)
                 return redirect(url_for("thankyou"))
         else: 
             message = "Please fill in all fields"
