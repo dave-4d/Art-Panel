@@ -40,6 +40,10 @@ purchases.txt
 templates/
     index.html
     thankyou.html
+static/
+    css/
+        style.css
+    images/
 ```
 
 - **index.html**: This is the main page. It shows all the artworks and has the form for people to buy art.
