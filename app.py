@@ -9,6 +9,7 @@ app.config['Mail_USE_TLS'] = True
 app.config['Mail_USERNAME'] = '---email.gmail.com'
 app.config['Mail_PASSWORD'] = 'yourpassword'
 
+mail = Mail(app)
 
 
 artworks = [
@@ -25,6 +26,21 @@ artworks = [
 def save_purchases(name, email, title):
     with open("purchases.txt", "a") as file:
         file.write(f"{name},{email},{title}")
+        
+def send_purchases_email(recipient, art):
+    subject = f"Thanks for Purchasing: {art['title']}"
+    body = f"""Hi,
+    
+Thanks for supporting me by purchasing "{art['title']}😊
+
+Description: {art['description']}
+
+Price: {art['title']}
+
+I appreciate your Support!
+"""
+    msg = Message(subject, recipients=[recipient], body=body, sender=app.config['MAIL_USERNAME'])
+    mail.send(msg)
         
         
 @app.route("/", methods=["GET", "POST"])
