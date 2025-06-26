@@ -1,4 +1,4 @@
-# Art Store
+# Art Panels
 
 This is a simple website to sell my art online. It is built with Python, Flask, and Flask-Mail.
 
